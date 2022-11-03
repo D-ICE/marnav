@@ -65,6 +65,7 @@
 #include <marnav/nmea/hsc.hpp>
 #include <marnav/nmea/its.hpp>
 #include <marnav/nmea/lcd.hpp>
+#include <marnav/nmea/mmb.hpp>
 #include <marnav/nmea/mob.hpp>
 #include <marnav/nmea/msk.hpp>
 #include <marnav/nmea/mss.hpp>
@@ -1374,6 +1375,12 @@ static void print_detail_vdr(const marnav::nmea::sentence * s)
 	print("Speed of Current", render(t->get_speed()));
 }
 
+static void print_detail_mmb(const marnav::nmea::sentence * s)
+{
+	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mmb>(s);
+	print("Pressure (bars)", render(t->get_pressure_bars()));
+}
+
 static void print_detail_mss(const marnav::nmea::sentence * s)
 {
 	const auto t = marnav::nmea::sentence_cast<marnav::nmea::mss>(s);
@@ -2032,6 +2039,7 @@ static const std::vector<nmea_entry> & nmea_sentences()
 		ADD_SENTENCE(hsc),
 		ADD_SENTENCE(its),
 		ADD_SENTENCE(lcd),
+		ADD_SENTENCE(mmb),
 		ADD_SENTENCE(mob),
 		ADD_SENTENCE(msk),
 		ADD_SENTENCE(mss),
